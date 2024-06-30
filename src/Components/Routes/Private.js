@@ -10,7 +10,9 @@ export default function PrivateRoute() {
 
   useEffect(() => {
     const authCheck = async () => {
-      const res = await axios.get("/api/v1/auth/user-auth");
+      const res = await axios.get(
+        "https://backend-market-1bby.onrender.com/api/v1/auth/user-auth"
+      );
       if (res.data.ok) {
         setok(true);
       } else {

@@ -19,11 +19,14 @@ const UpdateAddressForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put("/api/v1/auth/update-address", {
-        name,
-        address,
-        phone,
-      });
+      const { data } = await axios.put(
+        "https://backend-market-1bby.onrender.com/api/v1/auth/update-address",
+        {
+          name,
+          address,
+          phone,
+        }
+      );
 
       if (data.error) {
         toast.error(data?.error);

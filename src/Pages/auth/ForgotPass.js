@@ -18,11 +18,14 @@ const ForgotPass = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`/api/v1/auth/forgot-password`, {
-        email,
-        question,
-        newPassword,
-      });
+      const res = await axios.post(
+        `https://backend-market-1bby.onrender.com/api/v1/auth/forgot-password`,
+        {
+          email,
+          question,
+          newPassword,
+        }
+      );
       if (res && res.data.success) {
         toast.success(res.data.message);
 

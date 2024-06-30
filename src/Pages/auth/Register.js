@@ -19,14 +19,17 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(`/api/v1/auth/register/`, {
-        name,
-        email,
-        password,
-        phone,
-        address,
-        question,
-      });
+      const res = await axios.post(
+        `https://backend-market-1bby.onrender.com/api/v1/auth/register/`,
+        {
+          name,
+          email,
+          password,
+          phone,
+          address,
+          question,
+        }
+      );
       if (res && res.data.success) {
         toast.success(res.data.message);
         navigate("/login");

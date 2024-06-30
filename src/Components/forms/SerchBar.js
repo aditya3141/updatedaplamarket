@@ -34,7 +34,9 @@ const SearchBar = () => {
 
   const performSearch = async (keyword) => {
     try {
-      const { data } = await axios.get(`/api/v1/product/search/${keyword}`);
+      const { data } = await axios.get(
+        `https://backend-market-1bby.onrender.com/api/v1/product/search/${keyword}`
+      );
       setValues({ ...values, results: data });
       navigate("/search");
     } catch (error) {
