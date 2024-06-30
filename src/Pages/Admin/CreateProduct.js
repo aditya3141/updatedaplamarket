@@ -22,7 +22,9 @@ const CreateProduct = () => {
   // Get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/gets-category");
+      const { data } = await axios.get(
+        "https://backend-market-1bby.onrender.com/api/v1/category/gets-category"
+      );
       if (data?.success) {
         setCategories(data?.category);
       }

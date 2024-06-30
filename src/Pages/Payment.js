@@ -27,9 +27,12 @@ const Payment = () => {
   const handlePayment = async () => {
     try {
       setVisible(true);
-      const { data } = await axios.post("/api/v1/product/payment", {
-        cart,
-      });
+      const { data } = await axios.post(
+        "https://backend-market-1bby.onrender.com/api/v1/product/payment",
+        {
+          cart,
+        }
+      );
 
       localStorage.removeItem("cart");
       setCart([]);

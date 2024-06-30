@@ -32,7 +32,7 @@ const ProductDetails = () => {
   const getProduct = async () => {
     try {
       const { data } = await axios.get(
-        `/api/v1/product/get-product/${params.slug}`
+        `https://backend-market-1bby.onrender.com/api/v1/product/get-product/${params.slug}`
       );
       setProduct(data?.product);
       setImages(data.product.images || []);
@@ -46,7 +46,7 @@ const ProductDetails = () => {
   const getSimilarProduct = async (pid, cid) => {
     try {
       const { data } = await axios.get(
-        `/api/v1/product/similer-product/${pid}/${cid}`
+        `https://backend-market-1bby.onrender.com/api/v1/product/similer-product/${pid}/${cid}`
       );
       setRelatedProducts(data?.products);
     } catch (error) {
@@ -138,7 +138,7 @@ const ProductDetails = () => {
                   images.map((image, index) => (
                     <SwiperSlide key={index}>
                       <img
-                        src={`http://localhost:9000/${image}`}
+                        src={`https://backend-market-1bby.onrender.com/${image}`}
                         alt={`product_image_${index}`}
                         className="img img-responsive"
                       />
@@ -275,7 +275,7 @@ const ProductDetails = () => {
                 <div className="product-box-img">
                   <NavLink to={`/product/${p.slug}`}>
                     <img
-                      src={`/api/v1/product/product-photo/${p._id}`}
+                      src={`https://backend-market-1bby.onrender.com/api/v1/product/product-photo/${p._id}`}
                       className="card-img-top"
                       alt={p.name}
                     />
