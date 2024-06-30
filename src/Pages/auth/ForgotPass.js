@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import BiHomeAlt from "react-icons";
 
 import Layout from "../../Components/Layout/AllLayout";
 

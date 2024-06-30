@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../Components/Layout/AllLayout";
 import { NavLink } from "react-router-dom";
 import { useSearch } from "../context/search";
-import { BiShoppingBag, BiSolidHeart, BiRupee } from "react-icons/bi";
+
 import { useCart } from "../context/cart";
 import { toast } from "react-hot-toast";
 
@@ -43,15 +43,11 @@ const Search = () => {
                         );
                         toast.success("कार्टमध्ये आयटम जोडलेला आहे.");
                       }}
-                    >
-                      <BiShoppingBag />
-                    </NavLink>
+                    ></NavLink>
                   </div>
                 </div>
                 <div className="like-btn ">
-                  <div className="text-danger">
-                    <BiSolidHeart />
-                  </div>
+                  <div className="text-danger"></div>
                   <div className="effect-group">
                     <span className="effect" />
                     <span className="effect" />

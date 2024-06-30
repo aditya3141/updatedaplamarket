@@ -3,13 +3,7 @@ import Layout from "../Components/Layout/AllLayout";
 import { useCart } from "../context/cart";
 import axios from "axios";
 import { useParams, useNavigate, useLocation, NavLink } from "react-router-dom";
-import {
-  BiSolidCartAlt,
-  BiShoppingBag,
-  BiSolidHeart,
-  BiArrowBack,
-  BiSolidStar,
-} from "react-icons/bi";
+
 import { MdOutlineDeliveryDining } from "react-icons/md";
 import { toast } from "react-hot-toast";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -92,7 +86,24 @@ const ProductDetails = () => {
             <div className="header-panel">
               <NavLink to={"/"} className="product-back">
                 <span className="product-back">
-                  <BiArrowBack />
+                  <i className="iconsax back-btn" data-icon="arrow-left">
+                    <svg
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9.57141 18.8211C9.38141 18.8211 9.19141 18.7511 9.04141 18.6011L2.97141 12.5311C2.68141 12.2411 2.68141 11.7611 2.97141 11.4711L9.04141 5.40109C9.33141 5.11109 9.81141 5.11109 10.1014 5.40109C10.3914 5.69109 10.3914 6.17109 10.1014 6.46109L4.56141 12.0011L10.1014 17.5411C10.3914 17.8311 10.3914 18.3111 10.1014 18.6011C9.96141 18.7511 9.76141 18.8211 9.57141 18.8211Z"
+                        fill="#292D32"
+                      />
+                      <path
+                        d="M20.5019 12.75H3.67188C3.26188 12.75 2.92188 12.41 2.92188 12C2.92188 11.59 3.26188 11.25 3.67188 11.25H20.5019C20.9119 11.25 21.2519 11.59 21.2519 12C21.2519 12.41 20.9119 12.75 20.5019 12.75Z"
+                        fill="#292D32"
+                      />
+                    </svg>
+                  </i>
                 </span>
               </NavLink>
               <h3 className="theme-color">{product?.category?.name}</h3>
@@ -151,20 +162,7 @@ const ProductDetails = () => {
                 <div className="ratings mt-1">
                   <div className="d-flex align-items-center gap-1">
                     <h4 className="theme-color fw-normal">4.0</h4>
-                    <ul className="rating-stars">
-                      <li className="img-fluid stars">
-                        <BiSolidStar />
-                      </li>
-                      <li className="img-fluid stars">
-                        <BiSolidStar />
-                      </li>
-                      <li className="img-fluid stars">
-                        <BiSolidStar />
-                      </li>
-                      <li className="img-fluid stars">
-                        <BiSolidStar />
-                      </li>
-                    </ul>
+
                     <h4 className="reviews">156 Reviews</h4>
                   </div>
                 </div>
@@ -201,9 +199,7 @@ const ProductDetails = () => {
                         }}
                       >
                         Add To Cart
-                        <span className="fs-6">
-                          <BiSolidCartAlt />
-                        </span>
+                        <span className="fs-6"></span>
                       </button>
                     </div>
                   </div>
@@ -289,16 +285,12 @@ const ProductDetails = () => {
                         onClick={() => {
                           handleAddToCart(p);
                         }}
-                      >
-                        <BiShoppingBag />
-                      </NavLink>
+                      ></NavLink>
                     </div>
                   </NavLink>
                 </div>
                 <div className="like-btn">
-                  <div className="text-danger">
-                    <BiSolidHeart />
-                  </div>
+                  <div className="text-danger"></div>
                   <div className="effect-group">
                     <span className="effect" />
                     <span className="effect" />

@@ -5,7 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Link, NavLink } from "react-router-dom";
 import Layout from "../../Components/Layout/AllLayout";
-import { BiShoppingBag, BiSolidHeart, BiRupee } from "react-icons/bi";
+
 const Products = () => {
   const [products, setProducts] = useState([]);
 
@@ -52,15 +52,11 @@ const Products = () => {
                           alt={p.name}
                         />
                         <div className="cart-box">
-                          <NavLink className="text-warning">
-                            <BiShoppingBag />
-                          </NavLink>
+                          <NavLink className="text-warning"></NavLink>
                         </div>
                       </div>
                       <div className="like-btn ">
-                        <div className="text-danger">
-                          <BiSolidHeart />
-                        </div>
+                        <div className="text-danger"></div>
                         <div className="effect-group">
                           <span className="effect" />
                           <span className="effect" />
@@ -75,9 +71,7 @@ const Products = () => {
                           <h5>{p.description}</h5>
                           <h3 className="fw-semibold">
                             {p.price}
-                            <span className="fs-5">
-                              <BiRupee />
-                            </span>
+                            <span className="fs-5"></span>
                           </h3>
                         </div>
                       </div>

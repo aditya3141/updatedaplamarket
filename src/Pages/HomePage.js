@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../Components/Layout/AllLayout.js";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { BiFilterAlt } from "react-icons/bi";
+
 import { NavLink, useHistory, useNavigate } from "react-router-dom";
-import { BiShoppingBag, BiSolidHeart } from "react-icons/bi";
+
 import axios from "axios";
 import { Checkbox, Modal, Radio } from "antd";
 import { Prices } from "../Components/Prices.js";
@@ -271,9 +271,7 @@ const HomePage = () => {
                       </NavLink>
                     </div>
                     <div className="like-btn ">
-                      <div className="text-danger">
-                        <BiSolidHeart />
-                      </div>
+                      <div className="text-danger"></div>
                       <div className="effect-group">
                         <span className="effect" />
                         <span className="effect" />
