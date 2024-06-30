@@ -56,7 +56,7 @@ const CreateProduct = () => {
       });
 
       const { data } = await axios.post(
-        "/api/v1/product/create-product",
+        "https://backend-market-1bby.onrender.com/api/v1/product/create-product",
         productData
       );
       if (data?.success) {
