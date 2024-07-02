@@ -39,36 +39,45 @@ const CreateProduct = () => {
 
   // Create product function
   const handleCreate = async (e) => {
-    e.preventDefault();
-    try {
-      const productData = new FormData();
-      productData.append("name", name);
-      productData.append("description", description);
-      productData.append("price", price);
-      productData.append("quantity", quantity);
-      productData.append("category", category);
-      productData.append("shipping", shipping);
-      if (photo) {
-        productData.append("photo", photo);
-      }
-      images.forEach((image, index) => {
-        productData.append(`images`, image);
-      });
-
-      const { data } = await axios.post(
-        "https://backend-market-1bby.onrender.com/api/v1/product/create-product",
-        productData
-      );
-      if (data?.success) {
-        Toast.error(data?.message);
-      } else {
-        Toast.success("Product Created Successfully");
-        navigate("/dashboard/admin/products");
-      }
-    } catch (error) {
-      Toast.error("Something went wrong");
+  e.preventDefault();
+  try {
+    const productData = new FormData();
+    productData.append("name", name);
+    productData.append("description", description);
+    productData.append("price", price);
+    productData.append("quantity", quantity);
+    productData.append("category", category);
+    productData.append("shipping", shipping);
+    
+    if (photo) {
+      productData.append("photo", photo);
     }
-  };
+    
+    images.forEach((image) => {
+      productData.append("images", image);
+    });
+
+    const { data } = await axios.post(
+      "https://backend-market-1bby.onrender.com/api/v1/product/create-product",
+      productData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+    );
+
+    if (data?.success) {
+      Toast.success("Product Created Successfully");
+      navigate("/dashboard/admin/products");
+    } else {
+      Toast.error(data?.message || "Failed to create product");
+    }
+  } catch (error) {
+    console.error("Error creating product:", error);
+    Toast.error(error.response?.data?.message || "Something went wrong");
+  }
+};
 
   return (
     <Layout>
