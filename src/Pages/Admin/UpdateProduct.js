@@ -25,7 +25,7 @@ const UpdateProduct = () => {
   const getSingleProduct = async () => {
     try {
       const { data } = await axios.get(
-        `https://backend-market-1bby.onrender.com/api/v1/product/get-product/${params.slug}`
+        `https://updatedbackendwithfile.onrender.com/api/v1/product/get-product/${params.slug}`
       );
       setName(data.product.name);
       setId(data.product._id);
@@ -48,7 +48,7 @@ const UpdateProduct = () => {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        "https://backend-market-1bby.onrender.com/api/v1/category/gets-category"
+        "https://updatedbackendwithfile.onrender.com/api/v1/category/gets-category"
       );
       if (data?.success) {
         setCategories(data?.category);
@@ -83,7 +83,7 @@ const UpdateProduct = () => {
       productData.append("shipping", shipping);
 
       const { data } = await axios.put(
-        `https://backend-market-1bby.onrender.com/api/v1/product/update-product/${id}`,
+        `https://updatedbackendwithfile.onrender.com/api/v1/product/update-product/${id}`,
         productData
       );
       if (data?.success) {
@@ -101,7 +101,7 @@ const UpdateProduct = () => {
   const handleDelete = async () => {
     try {
       const { data } = await axios.delete(
-        `https://backend-market-1bby.onrender.com/api/v1/product/product-delete/${id}`
+        `https://updatedbackendwithfile.onrender.com/api/v1/product/product-delete/${id}`
       );
       Toast.success("Product Deleted Successfully");
       navigate("/dashboard/admin/products");
@@ -165,7 +165,7 @@ const UpdateProduct = () => {
           ) : (
             <div className="text-center">
               <img
-                src={`https://backend-market-1bby.onrender.com/api/v1/product/product-photo/${id}`}
+                src={`https://updatedbackendwithfile.onrender.com/api/v1/product/product-photo/${id}`}
                 alt="product_photo"
                 height={"200px"}
                 className="img img-responsive"
