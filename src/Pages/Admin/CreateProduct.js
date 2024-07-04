@@ -23,7 +23,7 @@ const CreateProduct = () => {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        "https://backend-market-1.onrender.com/api/v1/category/gets-category"
+        "https://updatedbackendwithfile.onrender.com/api/v1/category/gets-category"
       );
       if (data?.success) {
         setCategories(data?.category);
@@ -58,7 +58,7 @@ const CreateProduct = () => {
     });
 
     const { data } = await axios.post(
-      "https://backend-market-1.onrender.com/api/v1/product/create-product",
+      "https://updatedbackendwithfile.onrender.com/api/v1/product/create-product",
       productData,
       {
         headers: {
