@@ -273,6 +273,11 @@ img.object {
 }
 
 @media screen and (max-width: 500px) {
+  .swiper-slide img {
+    height: 100%;
+    max-width: 300px;
+    object-fit: contain;
+}
   .table-h {
     font-size: 10px;
     font-weight: bold;
