@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../Components/Layout/AllLayout";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/auth";
-
+import { IoLogInOutline } from "react-icons/io5";
 const UserMenu = () => {
   const [auth, setAuth] = useAuth();
   const handleLogout = () => {
@@ -88,7 +88,9 @@ const UserMenu = () => {
                 </li>
                 <li>
                   <NavLink to="/login/" className="profile-box text-user fs-3">
-                    <div className="profile-img"></div>
+                    <div className="profile-img">
+                      <IoLogInOutline />
+                    </div>
                     <h4>Login</h4>
                   </NavLink>
                 </li>
