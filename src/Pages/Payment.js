@@ -28,7 +28,7 @@ const Payment = () => {
     try {
       setVisible(true);
       const { data } = await axios.post(
-        "https://backend-market-1bby.onrender.com/api/v1/product/payment",
+        "https://updatedbackendwithfile.onrender.com/api/v1/product/payment",
         {
           cart,
         }
@@ -80,7 +80,7 @@ const Payment = () => {
                     <label className="form-label">
                       <img
                         className="img-fluid"
-                        src="../../images/svg/google.svg"
+                        src="https://themes.pixelstrap.com/fuzzy/assets/images/icons/svg/google-pay.svg"
                         alt="success-payment"
                       />
                       <span>
@@ -99,7 +99,7 @@ const Payment = () => {
                     <label className="form-label" htmlFor="six">
                       <img
                         className="img-fluid"
-                        src="../../images/svg/wallet.svg"
+                        src="https://themes.pixelstrap.com/fuzzy/assets/images/icons/svg/cash.svg"
                         alt="success-payment"
                       />
                       <span>
@@ -143,7 +143,7 @@ const Payment = () => {
             <div className="confirm-title text-center">
               <img
                 className="img-fluid confirm-offer"
-                src="../../images/svg/success.gif"
+                src="https://themes.pixelstrap.com/fuzzy/assets/images/gif/success.gif"
                 alt="success-payment"
               />
 

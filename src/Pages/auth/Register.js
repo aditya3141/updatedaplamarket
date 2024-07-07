@@ -20,7 +20,7 @@ const Register = () => {
 
     try {
       const res = await axios.post(
-        `https://backend-market-1bby.onrender.com/api/v1/auth/register/`,
+        `https://updatedbackendwithfile.onrender.com/api/v1/auth/register/`,
         {
           name,
           email,

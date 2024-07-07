@@ -87,7 +87,7 @@ const CartPage = () => {
                       <NavLink to={`/product/${p.slug}`}>
                         <img
                           className="img-fluid img"
-                          src={`https://backend-market-1bby.onrender.com/api/v1/product/product-photo/${p._id}`}
+                          src={`https://updatedbackendwithfile.onrender.com/api/v1/product/product-photo/${p._id}`}
                           alt="p11"
                         />
                       </NavLink>

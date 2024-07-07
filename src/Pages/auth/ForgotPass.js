@@ -19,7 +19,7 @@ const ForgotPass = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `https://backend-market-1bby.onrender.com/api/v1/auth/forgot-password`,
+        `https://updatedbackendwithfile.onrender.com/api/v1/auth/forgot-password`,
         {
           email,
           question,

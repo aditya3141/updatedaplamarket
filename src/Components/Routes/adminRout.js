@@ -11,7 +11,7 @@ export default function AdminRoute() {
   useEffect(() => {
     const authCheck = async () => {
       const res = await axios.get(
-        "https://backend-market-1bby.onrender.com/api/v1/auth/admin-auth"
+        "https://updatedbackendwithfile.onrender.com/api/v1/auth/admin-auth"
       );
       if (res.data.ok) {
         setok(true);

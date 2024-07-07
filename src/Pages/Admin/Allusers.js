@@ -15,7 +15,7 @@ const Allusers = () => {
   const getAllUsers = async () => {
     try {
       const { data } = await axios.get(
-        "https://backend-market-1bby.onrender.com/api/v1/auth/all-Userss"
+        "https://updatedbackendwithfile.onrender.com/api/v1/auth/all-Userss"
       );
       setallusers(data.result);
       setallusers(data);
@@ -32,7 +32,7 @@ const Allusers = () => {
   const handleDelete = async (pId) => {
     try {
       const { data } = await axios.delete(
-        `https://backend-market-1bby.onrender.com/api/v1/auth/delete-Userss/${pId}`
+        `https://updatedbackendwithfile.onrender.com/api/v1/auth/delete-Userss/${pId}`
       );
       if (data.success) {
         toast.success("Users Delete Successfully");

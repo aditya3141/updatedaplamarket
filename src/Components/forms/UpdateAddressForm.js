@@ -20,7 +20,7 @@ const UpdateAddressForm = () => {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        "https://backend-market-1bby.onrender.com/api/v1/auth/update-address",
+        "https://updatedbackendwithfile.onrender.com/api/v1/auth/update-address",
         {
           name,
           address,
