@@ -96,7 +96,7 @@ const CartPage = () => {
                     <div className="horizontal-product-details">
                       <div className="d-flex align-items-center justify-content-between">
                         <a href="product-details.html">
-                          <h4>{p.name.substring(0, 30)}</h4>
+                          <h4>{p.name.substring(0, 20)}</h4>
                         </a>
 
                         <span
