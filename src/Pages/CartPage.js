@@ -1,48 +1,111 @@
 import Layout from "../Components/Layout/AllLayout";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import axios from "axios";
 import { AiOutlineDelete } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 
 const CartPage = () => {
-  const [auth, setAuth] = useAuth();
+  const [auth] = useAuth();
   const [cart, setCart] = useCart();
-
+  const [quantities, setQuantities] = useState({});
   const navigate = useNavigate();
 
-  //total price
+  useEffect(() => {
+    const initialQuantities = {};
+    const updatedCart = cart.map((item) => {
+      initialQuantities[item._id] = item.qty;
+      return {
+        ...item,
+        originalPrice: item.originalPrice || item.price / item.qty, // Ensure originalPrice is set
+      };
+    });
+    setCart(updatedCart);
+    setQuantities(initialQuantities);
+  }, [cart, setCart]);
+
+  const handleQuantityChange = async (productId, newQuantity) => {
+    try {
+      // Update local state with new quantity
+      const updatedQuantities = {
+        ...quantities,
+        [productId]: newQuantity,
+      };
+      setQuantities(updatedQuantities);
+
+      // Update cart state with new quantity and recalculated price
+      const updatedCart = cart.map((item) => {
+        if (item._id === productId) {
+          const updatedItem = {
+            ...item,
+            qty: newQuantity,
+            price: item.price * newQuantity, // Recalculate price based on original price and new quantity
+          };
+          return updatedItem;
+        }
+        return item;
+      });
+
+      setCart(updatedCart);
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+      // Send the updated cart to the backend
+      const cartData = updatedCart.map((item) => ({
+        productId: item._id,
+        qty: item.qty,
+        price: item.price, // Ensure price is sent as updated price
+      }));
+
+      await axios.post(
+        "https://updatedbackendwithfile.onrender.com/api/v1/payment",
+        { cart: cartData },
+        {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        }
+      );
+
+      toast.success("Quantity updated successfully.");
+    } catch (error) {
+      toast.error("An error occurred while updating the quantity.");
+    }
+  };
+
+  // Calculate total price
   const totalPrice = () => {
     try {
       let total = 0;
-      cart?.map((item) => {
-        total = total + item.price;
+      cart?.forEach((item) => {
+        total += item.price;
       });
-
       return total;
-    } catch (error) {}
+    } catch (error) {
+      return 0;
+    }
   };
 
-  const PymentHandle = () => {
+  const PaymentHandle = () => {
     if (totalPrice() < 100) {
-      toast.error("किमान ऑर्डर ची मर्यादा 100 रुपये आहे");
+      toast.error("Minimum order limit is 100 Rupees.");
     } else {
       navigate("/update-address");
     }
   };
-  //detele item
-  const removeCartItem = (pid) => {
+
+  const removeCartItem = (productId) => {
     try {
-      let myCart = [...cart];
-      let index = myCart.findIndex((item) => item._id === pid);
-      myCart.splice(index, 1);
-      setCart(myCart);
-      toast.success("कार्टमधून आयटम काढले आहे");
-      localStorage.setItem("cart", JSON.stringify(myCart));
-    } catch (error) {}
+      const updatedCart = cart.filter((item) => item._id !== productId);
+      setCart(updatedCart);
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      toast.success("Item removed from cart.");
+    } catch (error) {
+      toast.error("An error occurred while removing the item.");
+    }
   };
+
   return (
     <Layout>
       <div>
@@ -72,47 +135,66 @@ const CartPage = () => {
           </NavLink>
           <h3 className="text-center mb-3 text-warning">
             {cart?.length
-              ? `You Have ${cart.length} 
-                 items in your cart ${
-                   auth?.token ? "" : "please login to checkout"
-                 }`
-              : ` Your Cart Is Empty `}
+              ? `You Have ${cart.length} items in your cart ${
+                  auth?.token ? "" : "please login to checkout"
+                }`
+              : `Your Cart Is Empty`}
           </h3>
           <div className="custom-container">
             <ul className="horizontal-product-list">
-              {cart?.map((p) => (
-                <li className="cart-product-box" key={p._id}>
+              {cart?.map((product) => (
+                <li className="cart-product-box" key={product._id}>
                   <div className="horizontal-product-box">
                     <div className="horizontal-product-img">
-                      <NavLink to={`/product/${p.slug}`}>
+                      <NavLink to={`/product/${product.slug}`}>
                         <img
                           className="img-fluid img"
-                          src={`https://updatedbackendwithfile.onrender.com/api/v1/product/product-photo/${p._id}`}
-                          alt="p11"
+                          src={`https://updatedbackendwithfile.onrender.com/api/v1/product/product-photo/${product._id}`}
+                          alt={product.name}
                         />
                       </NavLink>
                     </div>
-
                     <div className="horizontal-product-details">
                       <div className="d-flex align-items-center justify-content-between">
-                        <a href="product-details.html">
-                          <h4>{p.name.substring(0, 20)}</h4>
-                        </a>
-
+                        <NavLink to={`/product/${product.slug}`}>
+                          <h4>{product.name.substring(0, 30)}</h4>
+                        </NavLink>
                         <span
                           className="iconsax trash text-warning fs-5"
-                          onClick={() => removeCartItem(p._id)}
+                          onClick={() => removeCartItem(product._id)}
                         >
                           <AiOutlineDelete />
                         </span>
                       </div>
                       <ul className="product-info">
-                        <li>Qty : 1</li>
+                        <li>
+                          Qty:{" "}
+                          <select
+                            value={quantities[product._id] || product.qty}
+                            onChange={(e) =>
+                              handleQuantityChange(
+                                product._id,
+                                parseInt(e.target.value)
+                              )
+                            }
+                            style={{
+                              border: "none",
+                              borderRadius: "6px",
+                              padding: "0 7px",
+                            }}
+                          >
+                            {[...Array(5).keys()].map((index) => (
+                              <option key={index + 1} value={index + 1}>
+                                {index + 1}
+                              </option>
+                            ))}
+                          </select>
+                        </li>
                       </ul>
                       <div className="d-flex align-items-center justify-content-between mt-3">
                         <div className="d-flex align-items-center gap-2">
                           <h3 className="fw-semibold">
-                            Price : {p.price} &#8377;
+                            Price: {product.price} &#8377;
                           </h3>
                         </div>
                       </div>
@@ -125,7 +207,6 @@ const CartPage = () => {
         </section>
         {/* cart section end */}
         {/* cart bottom start */}
-
         <section className="bill-details section-b-space">
           <div className="custom-container">
             <div className="total-detail">
@@ -149,9 +230,13 @@ const CartPage = () => {
 
             <div>
               {auth?.token ? (
-                <button className="btn theme-btn w-100" onClick={PymentHandle}>
+                <NavLink
+                
+                  className="btn theme-btn w-100"
+                  onClick={PaymentHandle}
+                >
                   Continue To Payment
-                </button>
+                </NavLink>
               ) : (
                 <button
                   className="btn theme-btn w-100"
@@ -161,17 +246,13 @@ const CartPage = () => {
                     })
                   }
                 >
-                  Plase Login to checkout
+                  Login To Checkout
                 </button>
               )}
             </div>
           </div>
         </section>
-
         {/* cart bottom end */}
-        {/* panel-space start */}
-        <section className="panel-space" />
-        {/* panel-space end */}
       </div>
     </Layout>
   );
