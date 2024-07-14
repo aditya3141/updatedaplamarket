@@ -231,7 +231,7 @@ const CartPage = () => {
             <div>
               {auth?.token ? (
                 <NavLink
-                
+                  to="/update-address"
                   className="btn theme-btn w-100"
                   onClick={PaymentHandle}
                 >
