@@ -32,7 +32,7 @@ const UserMenu = () => {
   const handleLogout = () => {};
 
   const logout = () => {
-    window.open("http://localhost:9000/google-logout", "_self");
+    window.open("https://updatedaplamarket.vercel.app/google-logout", "_self");
     setAuth({
       ...auth,
       user: "null",
