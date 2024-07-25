@@ -44,7 +44,7 @@ const Login = () => {
   };
 
   const loginwithgoogle = () => {
-    window.open("https://updatedaplamarket.vercel.app/auth/google/callback", "_self");
+    window.open("https://updatedbackendwithfile.onrender.com/auth/google/callback", "_self");
   };
   return (
     <Layout>
