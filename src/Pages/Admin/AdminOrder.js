@@ -23,9 +23,7 @@ const AdminOrder = () => {
 
   const getOrders = async () => {
     try {
-      const { data } = await axios.get(
-        "https://updatedbackendwithfile.onrender.com/api/v1/auth/all-orders"
-      );
+      const { data } = await axios.get("https://updatedbackendwithfile.onrender.com/api/v1/auth/all-orders");
       setOrders(data);
     } catch (error) {
       console.log(error);
@@ -38,12 +36,9 @@ const AdminOrder = () => {
 
   const handleChange = async (orderId, value) => {
     try {
-      const { data } = await axios.put(
-        `https://updatedbackendwithfile.onrender.com/api/v1/auth/order-status/${orderId}`,
-        {
-          status: value,
-        }
-      );
+      const { data } = await axios.put(`https://updatedbackendwithfile.onrender.com/api/v1/auth/order-status/${orderId}`, {
+        status: value,
+      });
       getOrders();
     } catch (error) {
       console.log(error);
@@ -70,7 +65,7 @@ const AdminOrder = () => {
         <Adminmenu />
       </div>
       <div
-        className=" mt-4 w-100"
+        className="mt-4 w-100"
         style={{ width: "1200px", position: "absolute", left: "0" }}
       >
         <h1 className="text-center mb-4">All Orders</h1>
@@ -84,7 +79,7 @@ const AdminOrder = () => {
                   <th scope="col">Status</th>
                   <th scope="col">Buyer</th>
                   <th scope="col">Date</th>
-                  <th scope="col">Quantity</th>
+
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
@@ -109,7 +104,7 @@ const AdminOrder = () => {
                   <td>
                     {moment(order.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
                   </td>
-                  <td>{order.products.length}</td>
+
                   <td>
                     <button
                       className="p-2 btn-danger"
@@ -122,32 +117,32 @@ const AdminOrder = () => {
               </tbody>
             </table>
             <div className="container mb-3">
-              {order.products.map((product) => (
-                <div className="custom-container p-4" key={product._id}>
+              {order.products.map((p, pIndex) => (
+                <div className="custom-container p-4" key={p._id}>
                   <ul className="horizontal-product-list">
                     <li className="cart-product-box">
                       <div className="horizontal-product-box">
                         <div className="horizontal-product-img">
-                          <NavLink to={`/product/${product.slug}`}>
+                          <NavLink to={`/product/${p.slug}`}>
                             <img
                               className="img-fluid img"
-                              src={`https://updatedbackendwithfile.onrender.com/api/v1/product/product-photo/${product._id}`}
-                              alt={product.name}
+                              src={`https://updatedbackendwithfile.onrender.com/api/v1/product/product-photo/${p._id}`}
+                              alt={p.name}
                             />
                           </NavLink>
                         </div>
                         <div className="horizontal-product-details">
                           <div className="d-flex align-items-center justify-content-between">
-                            <NavLink to={`/product/${product.slug}`}>
-                              <h4>{product.name}</h4>
+                            <NavLink to={`/product/${p.slug}`}>
+                              <h4>{p.name}</h4>
                             </NavLink>
                           </div>
-                          <ul className="product-info">
-                            <li>{product.description.substring(0, 30)}...</li>
-                          </ul>
+                          <div className="d-flex align-items-center justify-content-between mt-3">
+                            <h3 className="fw-semibold">QTY: {p.qty} ;</h3>
+                          </div>
                           <div className="d-flex align-items-center justify-content-between mt-3">
                             <h3 className="fw-semibold">
-                              Price: {product.price} &#8377;
+                              Price: {p.price} &#8377;
                             </h3>
                           </div>
                         </div>
