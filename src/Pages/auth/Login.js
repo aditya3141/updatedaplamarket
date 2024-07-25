@@ -44,7 +44,7 @@ const Login = () => {
   };
 
   const loginwithgoogle = () => {
-    window.open("http://localhost:9000/auth/google/callback", "_self");
+    window.open("https://updatedaplamarket.vercel.app/auth/google/callback", "_self");
   };
   return (
     <Layout>
