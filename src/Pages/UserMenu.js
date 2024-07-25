@@ -1,17 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../Components/Layout/AllLayout";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
-import { IoLogInOutline } from "react-icons/io5";
+import axios from "axios";
+
 const UserMenu = () => {
   const [auth, setAuth] = useAuth();
-  const handleLogout = () => {
+  const [data, setData] = useState(null);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Make a GET request to your API endpoint using Axios
+        const response = await axios.get(
+          "https://updatedbackendwithfile.onrender.com/login/sucess",
+          {
+            withCredentials: true,
+          }
+        );
+        // Once data is fetched, update the state
+        setData(response.data);
+      } catch (error) {
+        // If an error occurs, update the state with the error
+      }
+    };
+
+    // Call the fetchData function
+    fetchData();
+  }, []);
+
+  const handleLogout = () => {};
+
+  const logout = () => {
+    window.open("http://localhost:9000/google-logout", "_self");
     setAuth({
       ...auth,
       user: "null",
       token: "",
     });
     localStorage.removeItem("auth");
+    navigate("/login");
   };
   return (
     <Layout>
@@ -45,14 +73,17 @@ const UserMenu = () => {
           <div className="d-flex align-items-center gap-1 fs-2 ms-2">
             <div className="text-warning mt-3">
               <span className="text-warning "></span>
+              <img
+                src={data?.user?.image}
+                style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                alt=""
+              />
             </div>
-            <div className="profile-name d-flex align-items-center justify-content-between mt-4 w-100 fs-4">
-              <h4 className="profile-box text-user mt-3 ms-2 d-flex justify-center gap-2 flex-column mt-4">
-                <div className="theme-btn fs-6 p-1"> {auth.user?.name}</div>
-
-                <div className="btn-warning fs-6 p1">
-                  <span className="theme-btn fs-6 p-1">91+</span>
-                  {auth.user?.phone}
+            <div className="profile-name d-flex align-items-center justify-content-between  w-100 fs-4">
+              <h4 className="profile-box text-user  ms-2 d-flex justify-center gap-2 flex-column mt-4">
+                <div className="theme-btn fs-6 p-1">
+                  {" "}
+                  {auth.user?.name || data?.user?.displayName}
                 </div>
               </h4>
             </div>
@@ -72,12 +103,14 @@ const UserMenu = () => {
                 <i className="ri-arrow-drop-right-line" />
               </NavLink>
             </li>
-            {!auth.user ? (
+            {!data?.user && !auth?.user ? (
               <>
                 <li>
                   <NavLink
                     to={`/dashboard/${
-                      auth?.user?.role === 1 ? "admin" : "user"
+                      auth?.user?.role || data?.user?.role === 0
+                        ? "admin"
+                        : "user"
                     }`}
                     className="profile-box text-user fs-3"
                   >
@@ -88,12 +121,11 @@ const UserMenu = () => {
                 </li>
                 <li>
                   <NavLink to="/login/" className="profile-box text-user fs-3">
-                    <div className="profile-img">
-                      <IoLogInOutline />
-                    </div>
+                    <div className="profile-img"></div>
                     <h4>Login</h4>
                   </NavLink>
                 </li>
+
                 <li>
                   <NavLink
                     to="/register/"
@@ -110,7 +142,9 @@ const UserMenu = () => {
                 <li>
                   <NavLink
                     to={`/dashboard/${
-                      auth?.user?.role === 1 ? "admin" : "user"
+                      auth?.user?.role || data?.user?.role === 1 || 0
+                        ? "admin"
+                        : "user"
                     }/orders/`}
                     className="profile-box text-user fs-3"
                   >
@@ -147,7 +181,7 @@ const UserMenu = () => {
                 </li>
                 <li>
                   <NavLink
-                    onClick={handleLogout}
+                    onClick={logout}
                     to="/login"
                     className="profile-box text-user fs-3"
                   >

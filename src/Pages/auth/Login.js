@@ -42,6 +42,10 @@ const Login = () => {
       toast.error("तुम्ही काही तरी चुकत आहात !");
     }
   };
+
+  const loginwithgoogle = () => {
+    window.open("http://localhost:9000/auth/google/callback", "_self");
+  };
   return (
     <Layout>
       <div className="auth-body container">
@@ -89,6 +93,49 @@ const Login = () => {
                 <button type="submit" className="btn auth-btn w-100">
                   Login
                 </button>
+                <a
+                  href="javascript:void(0);"
+                  className="btn gap-2 btn-thin btn-lg btn-light w-100 mb-2 rounded-xl"
+                >
+                  <svg
+                    width={30}
+                    height={30}
+                    viewBox="0 0 20 21"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ marginRight: "20px" }}
+                  >
+                    <g clipPath="url(#clip0_54_4200)">
+                      <path
+                        d="M4.43242 12.5863L3.73625 15.1852L1.19176 15.239C0.431328 13.8286 0 12.2149 0 10.5C0 8.84179 0.403281 7.27804 1.11812 5.90112H1.11867L3.38398 6.31644L4.37633 8.56815C4.16863 9.17366 4.05543 9.82366 4.05543 10.5C4.05551 11.2341 4.18848 11.9374 4.43242 12.5863Z"
+                        fill="#FBBB00"
+                      />
+                      <path
+                        d="M19.8253 8.63184C19.9401 9.23676 20 9.86148 20 10.5C20 11.2159 19.9247 11.9143 19.7813 12.5879C19.2945 14.8802 18.0225 16.8818 16.2605 18.2983L16.2599 18.2978L13.4066 18.1522L13.0028 15.6313C14.172 14.9456 15.0858 13.8725 15.5671 12.5879H10.2198V8.63184H15.6451H19.8253Z"
+                        fill="#518EF8"
+                      />
+                      <path
+                        d="M16.2599 18.2978L16.2604 18.2984C14.5467 19.6758 12.3698 20.5 10 20.5C6.19177 20.5 2.8808 18.3715 1.19177 15.239L4.43244 12.5863C5.27693 14.8401 7.45111 16.4445 10 16.4445C11.0956 16.4445 12.122 16.1484 13.0027 15.6313L16.2599 18.2978Z"
+                        fill="#28B446"
+                      />
+                      <path
+                        d="M16.3829 2.80219L13.1434 5.45437C12.2319 4.88461 11.1544 4.55547 9.99998 4.55547C7.39338 4.55547 5.17853 6.23348 4.37635 8.56812L1.11865 5.90109H1.1181C2.7824 2.6923 6.13513 0.5 9.99998 0.5C12.4263 0.5 14.6511 1.3643 16.3829 2.80219Z"
+                        fill="#F14336"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_54_4200">
+                        <rect
+                          width={40}
+                          height={40}
+                          fill="white"
+                          transform="translate(0 0.5)"
+                        />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  <span onClick={loginwithgoogle}>Sign in with google</span>
+                </a>
                 <button
                   type="submit"
                   className="btn btn-secondary w-100"
