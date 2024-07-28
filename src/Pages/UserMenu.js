@@ -12,12 +12,9 @@ const UserMenu = () => {
     const fetchData = async () => {
       try {
         // Make a GET request to your API endpoint using Axios
-        const response = await axios.get(
-          "https://updatedbackendwithfile.onrender.com/login/sucess",
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axios.get("https://updatedbackendwithfile.onrender.com/login/sucess", {
+          withCredentials: true,
+        });
         // Once data is fetched, update the state
         setData(response.data);
       } catch (error) {
@@ -32,7 +29,7 @@ const UserMenu = () => {
   const handleLogout = () => {};
 
   const logout = () => {
-    window.open("https://updatedaplamarket.vercel.app/google-logout", "_self");
+    window.open("https://updatedbackendwithfile.onrender.com/google-logout", "_self");
     setAuth({
       ...auth,
       user: "null",
