@@ -12,9 +12,7 @@ const UserMenu = () => {
     const fetchData = async () => {
       try {
         // Make a GET request to your API endpoint using Axios
-        const response = await axios.get("https://updatedbackendwithfile.onrender.com/login/sucess", {
-          withCredentials: true,
-        });
+        const response = await axios.get("https://updatedbackendwithfile.onrender.com/login/sucess");
         // Once data is fetched, update the state
         setData(response.data);
       } catch (error) {
