@@ -8,15 +8,21 @@ const UserMenu = () => {
   const [auth, setAuth] = useAuth();
   const [data, setData] = useState(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Make a GET request to your API endpoint using Axios
-        const response = await axios.get("https://updatedbackendwithfile.onrender.com/login/sucess");
+        const response = await axios.get(
+          "https://updatedbackendwithfile.onrender.com/login/success",
+          {
+            withCredentials: true,
+          }
+        );
         // Once data is fetched, update the state
         setData(response.data);
       } catch (error) {
-        // If an error occurs, update the state with the error
+        console.error("Error fetching data:", error.response ? error.response.data : error.message);
       }
     };
 
@@ -36,6 +42,7 @@ const UserMenu = () => {
     localStorage.removeItem("auth");
     navigate("/login");
   };
+
   return (
     <Layout>
       <header className="profile-header section-t-space">
@@ -77,7 +84,6 @@ const UserMenu = () => {
             <div className="profile-name d-flex align-items-center justify-content-between  w-100 fs-4">
               <h4 className="profile-box text-user  ms-2 d-flex justify-center gap-2 flex-column mt-4">
                 <div className="theme-btn fs-6 p-1">
-                  {" "}
                   {auth.user?.name || data?.user?.displayName}
                 </div>
               </h4>
@@ -167,7 +173,7 @@ const UserMenu = () => {
                         </svg>
                       </i>
                     </div>
-                    <div class="profile-details">
+                    <div className="profile-details">
                       <h4>Orders</h4>
                       <h5>Ongoing orders, Recent orders..</h5>
                     </div>
