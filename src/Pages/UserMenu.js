@@ -14,7 +14,7 @@ const UserMenu = () => {
       try {
         // Make a GET request to your API endpoint using Axios
         const response = await axios.get(
-          "https://updatedbackendwithfile.onrender.com/login/success",
+          "https://updatedbackendwithfile.onrender.com/login/sucess",
           {
             withCredentials: true,
           }
